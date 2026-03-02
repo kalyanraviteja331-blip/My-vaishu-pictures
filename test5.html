@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kalyan 💖 Vyshu</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#ff758c,#ff7eb3,#fad0c4);
+  text-align:center;
+  color:#fff;
+  overflow-x:hidden;
+  min-height:200vh;
+}
+
+/* Glow Title */
+h1{
+  margin-top:40px;
+  font-size:3em;
+  animation:glow 2s infinite alternate;
+  text-shadow:0 0 10px #fff,0 0 30px #ff4da6;
+}
+
+/* Typing Animation */
+.typing{
+  font-size:1.3em;
+  border-right:3px solid white;
+  width:0;
+  white-space:nowrap;
+  overflow:hidden;
+  margin:20px auto;
+  animation:typing 6s steps(60,end) forwards, blink .8s infinite;
+}
+
+@keyframes typing{ from{width:0} to{width:100%} }
+@keyframes blink{ 50%{border-color:transparent} }
+@keyframes glow{ from{ text-shadow:0 0 10px #fff; } to{ text-shadow:0 0 40px #ff66cc; } }
+
+/* Floating Layers */
+.layer{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  top:0;
+  left:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* Hearts */
+.heart{
+  position:absolute;
+  bottom:-50px;
+  animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+  0%{ transform:translateY(0); }
+  100%{ transform:translateY(-110vh); }
+}
+
+/* Snow */
+.snow{
+  position:absolute;
+  top:-10px;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  0%{ transform:translateY(0); }
+  100%{ transform:translateY(110vh); }
+}
+
+/* Fireworks */
+.firework{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+  0%{opacity:1; transform:scale(1);}
+  100%{opacity:0; transform:scale(6);}
+}
+
+/* Gallery */
+.gallery{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin:30px;
+}
+
+.gallery img{
+  width:200px;
+  height:200px;
+  border-radius:20px;
+  object-fit:cover;
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+  transition:.4s;
+}
+
+.gallery img:hover{
+  transform:scale(1.1);
+}
+
+footer{
+  margin:40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 Romantic Song -->
+<audio id="bgSong" loop>
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating Effect Layers -->
+<div class="layer" id="heartsLayer"></div>
+<div class="layer" id="snowLayer"></div>
+<div class="layer" id="fireworksLayer"></div>
+
+<h1>💍 Kalyan ❤️ Vyshu 💍</h1>
+
+<div class="typing">
+Tonight under the stars... I promise forever with you 💕
+</div>
+
+<div class="gallery">
+<img src="anime.jpg">
+<img src="anime2.jpg">
+<img src="anime3.jpg">
+<img src="anime4.jpg">
+<img src="anime5.jpg">
+<img src="anime6.jpg">
+<img src="anime7.jpg">
+<img src="anime8.jpg">
+<img src="anime9.jpg">
+<img src="anime10.jpg">
+</div>
+
+<footer>
+Made with endless love ✨
+</footer>
+
+<script>
+
+/* 🎵 Smooth Volume Fade-In */
+const song = document.getElementById("bgSong");
+song.volume = 0;
+
+function fadeInAudio(){
+  let vol = 0;
+  const interval = setInterval(()=>{
+    if(vol < 1){
+      vol += 0.02;
+      song.volume = vol;
+    } else {
+      clearInterval(interval);
+    }
+  },200);
+}
+
+/* Start song on first click (browser autoplay policy) */
+document.body.addEventListener("click",()=>{
+  song.play();
+  fadeInAudio();
+},{once:true});
+
+
+/* ❤️ HEARTS (Original Style) */
+const heartsLayer = document.getElementById("heartsLayer");
+function createHeart(){
+  let h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (Math.random()*25+15) + "px";
+  h.style.animationDuration = (Math.random()*4+6) + "s";
+  heartsLayer.appendChild(h);
+  setTimeout(()=>h.remove(),9000);
+}
+setInterval(createHeart,400);
+
+
+/* ❄ SNOW */
+const snowLayer = document.getElementById("snowLayer");
+function createSnow(){
+  let s = document.createElement("div");
+  s.className="snow";
+  s.innerHTML="❄";
+  s.style.left=Math.random()*100+"vw";
+  s.style.fontSize=(Math.random()*10+10)+"px";
+  s.style.animationDuration=(Math.random()*4+5)+"s";
+  snowLayer.appendChild(s);
+  setTimeout(()=>s.remove(),9000);
+}
+setInterval(createSnow,250);
+
+
+/* 🎆 FIREWORKS */
+const fireworksLayer=document.getElementById("fireworksLayer");
+function createFirework(){
+  let f=document.createElement("div");
+  f.className="firework";
+  f.style.left=Math.random()*100+"vw";
+  f.style.top=Math.random()*70+"vh";
+  f.style.background=`hsl(${Math.random()*360},100%,60%)`;
+  fireworksLayer.appendChild(f);
+  setTimeout(()=>f.remove(),1000);
+}
+setInterval(createFirework,600);
+
+</script>
+
+</body>
+</html>
